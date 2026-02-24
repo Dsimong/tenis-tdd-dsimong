@@ -9,32 +9,46 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class BasicScoringTest {
 
-    static Stream<Map.Entry<Integer, Integer>> scoreProvider() {
-        Map<Integer,Integer> scoreMap = new HashMap<>();
-        // Ambos jugadores anotan (15 puntos por anotación)
-        scoreMap.put(0, 0);    // Love-Love
-        scoreMap.put(1, 0);    // Fifteen-Love
-        scoreMap.put(0, 1);    // Love-Fifteen
-        scoreMap.put(1, 1);    // Fifteen-All
-        scoreMap.put(2, 0);    // Thirty-Love
-        scoreMap.put(0, 2);    // Love-Thirty
-        scoreMap.put(2, 1);    // Thirty-Fifteen
-        scoreMap.put(1, 2);    // Fifteen-Thirty
-        scoreMap.put(2, 2);    // Thirty-Thirty
+    static Stream<TestCase> scoreProvider() {
 
-        return scoreMap.entrySet().stream();
+        return Stream.of(
+                new TestCase(0, 0, "Love-All"),
+                new TestCase(1, 0, "Fifteen-Love"),
+                new TestCase(2, 0, "Thirty-Love"),
+                new TestCase(0, 1, "Love-Fifteen"),
+                new TestCase(0, 2, "Love-Thirty"),
+                new TestCase(1, 1, "Fifteen-All"),
+                new TestCase(2, 2, "Thirty-All")
+        );
     }
 
     @ParameterizedTest
     @MethodSource("scoreProvider")
-    void testPlayerOneScoresOnce_ShouldBeFifteenLove(Map.Entry<Integer, Integer> entry){
+    void testPlayerOneScoresOnce_ShouldBeFifteenLove(TestCase score){
         //Arrange
         BasicScoreTranslator translator = new BasicScoreTranslator();
 
         //Act
-        String result = translator.translate(entry.getKey(), entry.getValue());
+        String result = translator.translate(score.playerOneScore, score.playerTwoScore);
 
         //Assert
-        assertEquals("Fifteen-Love", result);
+        assertEquals(score.expectedResult, result);
+    }
+
+    static class TestCase {
+        int playerOneScore;
+        int playerTwoScore;
+        String expectedResult;
+
+        TestCase(int playerOneScore, int playerTwoScore, String expectedResult) {
+            this.playerOneScore = playerOneScore;
+            this.playerTwoScore = playerTwoScore;
+            this.expectedResult = expectedResult;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%d should return \"%s-%s\"", playerOneScore, playerTwoScore);
+        }
     }
 }
