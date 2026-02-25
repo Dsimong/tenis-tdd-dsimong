@@ -2,6 +2,15 @@
 public class BasicScoreTranslator {
 
     public String translate(int playerOneScore, int playerTwoScore) {
+        if (playerOneScore >= 3 && playerTwoScore >= 3) {
+            if (playerOneScore == playerTwoScore) { return "Deuce"; }
+            if (Math.abs(playerOneScore - playerTwoScore) == 1) {
+                return String.format("Advantage %s", playerOneScore > playerTwoScore ? "Player One" : "Player Two");
+            }
+            if (Math.abs(playerOneScore - playerTwoScore) >= 2) {
+                return String.format("%s pins", playerOneScore > playerTwoScore ? "Player One" : "Player Two");
+            }
+        }
         if (playerOneScore == playerTwoScore) { return String.format("%s-All", translateScore(playerOneScore)); }
         return String.format("%s-%s", translateScore(playerOneScore), translateScore(playerTwoScore));
     }

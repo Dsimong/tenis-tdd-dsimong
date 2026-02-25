@@ -18,7 +18,7 @@ public class AdvantageTranslatorTest {
 
     @ParameterizedTest
     @MethodSource("scoreProvider")
-    void testPlayerOneScoresOnce_ShouldBeFifteenLove(BasicScoringTest.TestCase score){
+    void testPlayerOneScoresOnce_ShouldBeFifteenLove(TestCase score){
         //Arrange
         BasicScoreTranslator translator = new BasicScoreTranslator();
 
