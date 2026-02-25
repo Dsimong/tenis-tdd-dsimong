@@ -13,12 +13,12 @@ public class BasicScoringTest {
 
         return Stream.of(
                 new TestCase(0, 0, "Love-All"),
-                new TestCase(1, 0, "Fifteen-Love"),
-                new TestCase(2, 0, "Thirty-Love"),
-                new TestCase(0, 1, "Love-Fifteen"),
-                new TestCase(0, 2, "Love-Thirty"),
-                new TestCase(1, 1, "Fifteen-All"),
-                new TestCase(2, 2, "Thirty-All")
+                new TestCase(15, 0, "Fifteen-Love"),
+                new TestCase(30, 0, "Thirty-Love"),
+                new TestCase(0, 15, "Love-Fifteen"),
+                new TestCase(0, 30, "Love-Thirty"),
+                new TestCase(15, 15, "Fifteen-All"),
+                new TestCase(30, 30, "Thirty-All")
         );
     }
 
