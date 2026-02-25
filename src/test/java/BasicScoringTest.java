@@ -18,7 +18,13 @@ public class BasicScoringTest {
                 new TestCase(0, 15, "Love-Fifteen"),
                 new TestCase(0, 30, "Love-Thirty"),
                 new TestCase(15, 15, "Fifteen-All"),
-                new TestCase(30, 30, "Thirty-All")
+                new TestCase(30, 30, "Thirty-All"),
+                new TestCase(40, 0, "Forty-Love"),
+                new TestCase(0, 40, "Love-Forty"),
+                new TestCase(40, 15, "Forty-Fifteen"),
+                new TestCase(15, 40, "Fifteen-Forty"),
+                new TestCase(40, 30, "Forty-Thirty"),
+                new TestCase(30, 40, "Thirty-Forty")
         );
     }
 
