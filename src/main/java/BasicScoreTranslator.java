@@ -9,9 +9,9 @@ public class BasicScoreTranslator {
     private String translateScore(int score) {
         switch (score) {
             case 0: return new LoveTranslator().translate();
-            case 15: return new FifteenTranslator().translate();
-            case 30: return new ThirtyTranslator().translate();
-            case 40: return new FortyTranslator().translate();
+            case 1: return new FifteenTranslator().translate();
+            case 2: return new ThirtyTranslator().translate();
+            case 3: return new FortyTranslator().translate();
             default: throw new IllegalArgumentException("Invalid score");
         }
     }

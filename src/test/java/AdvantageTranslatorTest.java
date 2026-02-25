@@ -1,36 +1,24 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Stream;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class BasicScoringTest {
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class AdvantageTranslatorTest {
 
     static Stream<TestCase> scoreProvider() {
 
         return Stream.of(
-                new TestCase(0, 0, "Love-All"),
-                new TestCase(1, 0, "Fifteen-Love"),
-                new TestCase(2, 0, "Thirty-Love"),
-                new TestCase(0, 1, "Love-Fifteen"),
-                new TestCase(0, 2, "Love-Thirty"),
-                new TestCase(1, 1, "Fifteen-All"),
-                new TestCase(2, 2, "Thirty-All"),
-                new TestCase(3, 0, "Forty-Love"),
-                new TestCase(0, 3, "Love-Forty"),
-                new TestCase(3, 1, "Forty-Fifteen"),
-                new TestCase(1, 3, "Fifteen-Forty"),
-                new TestCase(3, 2, "Forty-Thirty"),
-                new TestCase(2, 3, "Thirty-Forty")
+                new TestCase(3, 3, "Deuce"),
+                new TestCase(4, 3, "Advantage Player One"),
+                new TestCase(3, 4, "Advantage Player Two")
         );
     }
 
     @ParameterizedTest
     @MethodSource("scoreProvider")
-    void testPlayerOneScoresOnce_ShouldBeFifteenLove(TestCase score){
+    void testPlayerOneScoresOnce_ShouldBeFifteenLove(BasicScoringTest.TestCase score){
         //Arrange
         BasicScoreTranslator translator = new BasicScoreTranslator();
 
