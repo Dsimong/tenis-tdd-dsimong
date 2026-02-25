@@ -1,27 +1,22 @@
 
 public class BasicScoreTranslator {
+    private final GameScoreTranslator deuceGameTranslator;
+    private final GameScoreTranslator regularGameTranslator;
 
-    public String translate(int playerOneScore, int playerTwoScore) {
-        if (playerOneScore >= 3 && playerTwoScore >= 3) {
-            if (playerOneScore == playerTwoScore) { return "Deuce"; }
-            if (Math.abs(playerOneScore - playerTwoScore) == 1) {
-                return String.format("Advantage %s", playerOneScore > playerTwoScore ? "Player One" : "Player Two");
-            }
-            if (Math.abs(playerOneScore - playerTwoScore) >= 2) {
-                return String.format("%s Wins", playerOneScore > playerTwoScore ? "Player One" : "Player Two");
-            }
-        }
-        if (playerOneScore == playerTwoScore) { return String.format("%s-All", translateScore(playerOneScore)); }
-        return String.format("%s-%s", translateScore(playerOneScore), translateScore(playerTwoScore));
+    public BasicScoreTranslator() {
+        ScoreTranslator score = new ScoreTranslator();
+        this.deuceGameTranslator = new DeuceGameTranslator();
+        this.regularGameTranslator = new RegularGameTranslator(score);
     }
 
-    private String translateScore(int score) {
-        switch (score) {
-            case 0: return new LoveTranslator().translate();
-            case 1: return new FifteenTranslator().translate();
-            case 2: return new ThirtyTranslator().translate();
-            case 3: return new FortyTranslator().translate();
-            default: throw new IllegalArgumentException("Invalid score");
+    public String translate(int playerOneScore, int playerTwoScore) {
+        if (isDeuceGame(playerOneScore, playerTwoScore)) {
+            return deuceGameTranslator.translate(playerOneScore, playerTwoScore);
         }
+        return regularGameTranslator.translate(playerOneScore, playerTwoScore);
+    }
+
+    private boolean isDeuceGame(int playerOneScore, int playerTwoScore) {
+        return playerOneScore >= 3 && playerTwoScore >= 3;
     }
 }
