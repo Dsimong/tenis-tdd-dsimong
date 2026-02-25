@@ -8,7 +8,7 @@ public class BasicScoreTranslator {
                 return String.format("Advantage %s", playerOneScore > playerTwoScore ? "Player One" : "Player Two");
             }
             if (Math.abs(playerOneScore - playerTwoScore) >= 2) {
-                return String.format("%s pins", playerOneScore > playerTwoScore ? "Player One" : "Player Two");
+                return String.format("%s Wins", playerOneScore > playerTwoScore ? "Player One" : "Player Two");
             }
         }
         if (playerOneScore == playerTwoScore) { return String.format("%s-All", translateScore(playerOneScore)); }

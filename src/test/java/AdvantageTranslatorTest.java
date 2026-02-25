@@ -12,7 +12,9 @@ public class AdvantageTranslatorTest {
         return Stream.of(
                 new TestCase(3, 3, "Deuce"),
                 new TestCase(4, 3, "Advantage Player One"),
-                new TestCase(3, 4, "Advantage Player Two")
+                new TestCase(3, 4, "Advantage Player Two"),
+                new TestCase(5, 3, "Player One Wins"),
+                new TestCase(3, 5, "Player Two Wins")
         );
     }
 
